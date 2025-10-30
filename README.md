@@ -68,3 +68,47 @@ DB_PASSWORD=secret
 ```terminaloutput
 docker exec -it balance-db psql -U laravel -d balance_db
 ```
+
+1. Начисление средств пользователю
+```
+http://localhost:8080/api/deposit
+POST /api/deposit
+{
+  "user_id": 1,
+  "amount": 500.00,
+  "comment": "Пополнение через карту"
+}
+```
+
+2. Списание средств
+```
+http://localhost:8080/api/withdraw
+POST /api/withdraw
+{
+  "user_id": 1,
+  "amount": 200.00,
+  "comment": "Покупка подписки"
+}
+```
+
+3. Перевод между пользователями
+```
+http://localhost:8080/api/transfer
+POST /api/transfer
+{
+  "from_user_id": 1,
+  "to_user_id": 2,
+  "amount": 150.00,
+  "comment": "Перевод другу"
+}
+```
+
+4. Получение баланса пользователя
+```
+http://localhost:8080/api/balance/1
+GET /api/balance/{user_id}
+{
+  "user_id": 1,
+  "balance": 350.00
+}
+```
